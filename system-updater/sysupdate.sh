@@ -1,16 +1,25 @@
 #!/bin/sh
 
 
-# grabs the pkg manager name 
-PKG=$(cat "/usr/share/system-updater/choice.txt")
-
 RED="\033[91m"
 YELLOW="\033[93m"
 GREEN="\033[92m"
 BLUE="\033[94m"
 RESET="\033[0m"
 
-chafa "/usr/share/system-updater/banner/${PKG}.png"
+PKG=$(cat "/usr/share/system-updater/choice.txt")
+
+if command -v chafa >/dev/null 2>&1; then
+	chafa "/usr/share/system-updater/banner/${PKG}.png"
+else
+	printf "%b" "$BLUE"
+	echo "<###################################>"
+	echo " >##      SysUpdate cool ye      ##<"
+	echo "<###################################>"
+	printf "%b" "$RESET"
+	
+fi
+
 echo ""
 echo ""
 
@@ -118,7 +127,6 @@ if command -v brew >/dev/null 2>&1; then
     fi
 fi
 
-echo ""
 echo ""
 printf "%b" "$BLUE"
 echo "<###################################>"

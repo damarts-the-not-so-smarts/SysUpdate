@@ -1,10 +1,15 @@
 #!/bin/sh
 
+RED="\033[91m"
+YELLOW="\033[93m"
+GREEN="\033[92m"
+BLUE="\033[94m"
+RESET="\033[0m"
 
 # detects which directory
 DIRECTORY=$(dirname "$0")
 
-printf "%b" "\033[94m"
+printf "%b" "$BLUE"
 
 cat << 'EOF'
 ▄▄   ▄▄       ▄▄                           ▄▄ 
@@ -26,7 +31,9 @@ if command -v doas >/dev/null 2>&1; then
 elif command -v sudo >/dev/null 2>&1; then
     AUTH="sudo"
 else
+	printf "%b" "$RED"
     echo "[E]: Authentication tool not found."
+    printf "%b" "$RESET"
     exit 1
 fi
 
@@ -35,10 +42,7 @@ echo "All flatpak, snap, brew, and nix packages are automatically detected and u
 
 echo "Please enter the number corresponding to your native package manager: (it will be used in updating)"
 echo ""
-printf "%b" "\033[0m"
-
-YELLOW="\033[93m"
-RESET="\033[0m"
+printf "%b" "$RESET"
 
 echo -e "$YELLOW[ 1]$RESET apk (Alpine, Chimera)"
 echo -e "$YELLOW[ 2]$RESET apt (Debian, Ubuntu)"
