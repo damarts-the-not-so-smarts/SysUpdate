@@ -1,0 +1,130 @@
+#!/bin/sh
+
+
+# grabs the pkg manager name 
+PKG=$(cat "/usr/share/system-updater/choice.txt")
+
+RED="\033[91m"
+YELLOW="\033[93m"
+GREEN="\033[92m"
+BLUE="\033[94m"
+RESET="\033[0m"
+
+chafa "/usr/share/system-updater/banner/${PKG}.png"
+echo ""
+echo ""
+
+printf "%b" "$BLUE"
+echo "[^^^] : Starting update.."
+printf "%b" "$RESET"
+
+if command -v doas >/dev/null 2>&1; then
+    AUTH="doas"
+elif command -v sudo >/dev/null 2>&1; then
+    AUTH="sudo"
+else
+    printf "%b" "$RED"
+    echo "[E] : Authentication tool not found."
+    printf "%b" "$RESET"
+    exit 1
+fi
+
+printf "%b" "$GREEN"
+echo "[>>>] : Updating native packages.."
+printf "%b" "$RESET"
+case "$PKG" in
+    "apk")
+        $AUTH apk update && $AUTH apk upgrade --available
+        ;;
+    "apt")
+        $AUTH apt-get update && $AUTH apt-get dist-upgrade -y
+        ;;
+    "brew")
+        brew update && brew upgrade --formula --cask
+        ;;
+    "dnf")
+        $AUTH dnf upgrade --refresh -y --best --allowerasing
+        ;;
+    "eopkg")
+        $AUTH eopkg update-repo && $AUTH eopkg upgrade -y
+        ;;
+    "nix")
+        nix-channel --update && nix-env -u '*'
+        ;;
+    "ostree")
+        $AUTH rpm-ostree upgrade
+        ;;
+    "pacman")
+        $AUTH pacman -Syyu --noconfirm
+        ;;
+    "pkg")
+        $AUTH pkg update && $AUTH pkg upgrade -y
+        ;;
+    "slapt-get")
+        $AUTH slapt-get --update && $AUTH slapt-get --upgrade -y
+        ;;
+    "steamos")
+        $AUTH steamos-readonly disable
+        $AUTH pacman -Syyu --noconfirm
+        $AUTH steamos-readonly enable
+        ;;
+    "vso")
+        $AUTH vso trigger-update --now
+        ;;
+    "xbps")
+        $AUTH xbps-install -Syu
+        ;;
+    "zypper")
+        $AUTH zypper refresh --force && $AUTH zypper dist-upgrade -y --allow-vendor-change
+        ;;
+    *)
+    		printf "%b" "$YELLOW"
+        echo "[W] : No valid package manager, Skipping."
+        printf "%b" "$RESET"
+        ;;
+esac
+
+if command -v flatpak >/dev/null 2>&1; then
+	echo ""
+	printf "%b" "$GREEN"
+    echo "[>>>] : Updating flatpaks.."
+    printf "%b" "$RESET"
+    flatpak update -y
+fi
+
+if command -v snap >/dev/null 2>&1; then
+	echo ""
+	printf "%b" "$GREEN"
+    echo "[>>>] : Updating snaps.. snap snapity snap"
+    printf "%b" "$RESET"
+    $AUTH snap refresh
+fi
+
+if command -v nix-env >/dev/null 2>&1; then
+	if [ "$PKG" != "nix" ]; then
+		echo ""
+		printf "%b" "$GREEN"
+        echo "[>>>] : Updating nixes.. or nix's?"
+	    printf "%b" "$RESET"
+        nix-channel --update && nix-env -u '*'
+    fi
+fi
+
+if command -v brew >/dev/null 2>&1; then
+	if [ "$PKG" != "brew" ]; then
+		echo ""
+		printf "%b" "$GREEN"
+        echo "[>>>]: Updating brews.." # ur banned for using brew if ur on linux btw
+	    printf "%b" "$RESET"
+        brew update && brew upgrade --formula --cask
+    fi
+fi
+
+echo ""
+echo ""
+printf "%b" "$BLUE"
+echo "<###################################>"
+echo " >##      Update Completed!      ##<"
+echo "<###################################>"
+printf "%b" "$RESET"
+exit 0
