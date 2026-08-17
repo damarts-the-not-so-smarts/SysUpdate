@@ -1,19 +1,35 @@
 # SysUpdate
 update your packages across multiple package managers right into your terminal!
 
-## Steps with the installer:
-1) clone (or install the repo's files) to your home directory (make sure to install git!, also, the script is made to be in the home folder of your user, use that.):
+## steps to install:
+1) clone the repo and enter the folder:
 ```
-cd ~/
 git clone https://github.com/damarts-the-not-so-smarts/SysUpdate.git
+cd SysUpdate
 ```
 
-2) give the install script permissions to run, this is done by either going into your file manager and finding the option to "Run as executable", or running:
+2) give the install script permissions to run, this is done by either going into your file manager and finding the option to "Run as executable" or chmodding:
 ```
-chmod +x ~/SysUpdate/install.sh
+chmod +x ./install.sh
 ```
 
-3) to start the install, run:
+3) run the installer script:
 ```
-~/SysUpdate/install.sh
+./install.sh
 ```
+
+
+## steps to manual install:
+1) read the goddamn install.sh script its tiny
+2) done
+
+
+## dependancies:
+- chafa is needed to display the banner image, find how to install chafa for you specific linux distro. (its name on most package managers is `chafa` try that if you cant find it)
+- if youre on an immutable distro that doesnt use ostree, use the brew package manager to install it
+
+
+## reasons to use this
+- because cool banner
+- updates all secondary or other package managers
+- flex on homies
