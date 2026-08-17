@@ -64,9 +64,7 @@ case "$PKG" in
         $AUTH slapt-get --update && $AUTH slapt-get --upgrade -y
         ;;
     "steamos")
-        $AUTH steamos-readonly disable
-        $AUTH pacman -Syyu --noconfirm
-        $AUTH steamos-readonly enable
+        steamos-update
         ;;
     "vso")
         $AUTH vso trigger-update --now
