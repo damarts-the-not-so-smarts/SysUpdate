@@ -81,7 +81,7 @@ case "$PKG" in
         $AUTH slapt-get --update && $AUTH slapt-get --upgrade -y
         ;;
     "vso")
-        vso update
+        vso update && apx pkg update && apx pkg upgrade
         ;;
     "xbps")
         $AUTH xbps-install -Syu
