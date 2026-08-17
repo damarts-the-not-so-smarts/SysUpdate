@@ -7,6 +7,12 @@ GREEN="\033[92m"
 BLUE="\033[94m"
 RESET="\033[0m"
 
+if [ "$EUID" -eq 0 ]; then
+    ROOT=true
+else
+    ROOT=false
+fi
+
 PKG=$(cat "/usr/share/system-updater/choice.txt")
 
 if command -v chafa >/dev/null 2>&1; then
@@ -27,7 +33,9 @@ printf "%b" "$BLUE"
 echo "[^^^] : Starting update.."
 printf "%b" "$RESET"
 
-if command -v doas >/dev/null 2>&1; then
+if [ "$EUID" -eq 0 ]; then
+    AUTH=""
+elif command -v doas >/dev/null 2>&1; then
     AUTH="doas"
 elif command -v sudo >/dev/null 2>&1; then
     AUTH="sudo"
@@ -39,7 +47,7 @@ else
 fi
 
 printf "%b" "$GREEN"
-echo "[>>>] : Updating native packages.."
+echo "[>>>] : Updating packages.."
 printf "%b" "$RESET"
 case "$PKG" in
     "apk")
@@ -72,11 +80,8 @@ case "$PKG" in
     "slapt-get")
         $AUTH slapt-get --update && $AUTH slapt-get --upgrade -y
         ;;
-    "steamos")
-        steamos-update
-        ;;
     "vso")
-        vso update && apx update && apx upgrade
+        vso update
         ;;
     "xbps")
         $AUTH xbps-install -Syu
@@ -86,7 +91,7 @@ case "$PKG" in
         ;;
     *)
     		printf "%b" "$YELLOW"
-        echo "[W] : No valid package manager, Skipping."
+        echo "[W] : No valid package manager, Skipping.."
         printf "%b" "$RESET"
         ;;
 esac
