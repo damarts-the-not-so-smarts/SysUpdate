@@ -7,12 +7,6 @@ GREEN="\033[92m"
 BLUE="\033[94m"
 RESET="\033[0m"
 
-if [ "$EUID" -eq 0 ]; then
-    ROOT=true
-else
-    ROOT=false
-fi
-
 PKG=$(cat "/usr/share/system-updater/choice.txt")
 
 if command -v chafa >/dev/null 2>&1; then
