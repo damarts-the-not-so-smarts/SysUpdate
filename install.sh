@@ -6,7 +6,12 @@ GREEN="\033[92m"
 BLUE="\033[94m"
 RESET="\033[0m"
 
-# detects which directory
+if [ "$EUID" -eq 0 ]; then
+    ROOT=true
+else
+    ROOT=false
+fi
+
 DIRECTORY=$(dirname "$0")
 
 printf "%b" "$BLUE"
@@ -25,14 +30,15 @@ cat << 'EOF'
                                                                                        
 EOF
 
-# finds what authenticator you use, sudo and doas are supported
-if command -v doas >/dev/null 2>&1; then
+if [ "$EUID" -eq 0 ]; then
+    AUTH=""
+elif command -v doas >/dev/null 2>&1; then
     AUTH="doas"
 elif command -v sudo >/dev/null 2>&1; then
     AUTH="sudo"
 else
-	printf "%b" "$RED"
-    echo "[E]: Authentication tool not found."
+    printf "%b" "$RED"
+    echo "[E] : Authentication tool not found."
     printf "%b" "$RESET"
     exit 1
 fi
