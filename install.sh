@@ -6,12 +6,6 @@ GREEN="\033[92m"
 BLUE="\033[94m"
 RESET="\033[0m"
 
-if [ "$(id -u)" -eq 0 ]; then
-    ROOT=true
-else
-    ROOT=false
-fi
-
 DIRECTORY=$(dirname "$0")
 
 printf "%b" "$BLUE"
@@ -30,7 +24,7 @@ cat << 'EOF'
                                                                                        
 EOF
 
-if [ "$EUID" -eq 0 ]; then
+if [ "$(id -u)" -eq 0 ]; then
     AUTH=""
 elif command -v doas >/dev/null 2>&1; then
     AUTH="doas"
