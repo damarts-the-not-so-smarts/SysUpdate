@@ -33,7 +33,7 @@ printf "%b" "$BLUE"
 echo "[^^^] : Starting update.."
 printf "%b" "$RESET"
 
-if [ "$EUID" -eq 0 ]; then
+if [ "$(id -u)" -eq 0 ]; then
     AUTH=""
 elif command -v doas >/dev/null 2>&1; then
     AUTH="doas"
@@ -81,7 +81,7 @@ case "$PKG" in
         $AUTH slapt-get --update && $AUTH slapt-get --upgrade -y
         ;;
     "vso")
-        vso update && apx pkg update && apx pkg upgrade
+        vso update
         ;;
     "xbps")
         $AUTH xbps-install -Syu
