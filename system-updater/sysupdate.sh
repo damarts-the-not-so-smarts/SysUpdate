@@ -76,7 +76,7 @@ case "$PKG" in
         steamos-update
         ;;
     "vso")
-        $AUTH vso trigger-update --now
+        vso trigger-update --now
         ;;
     "xbps")
         $AUTH xbps-install -Syu
