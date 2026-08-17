@@ -6,7 +6,7 @@ GREEN="\033[92m"
 BLUE="\033[94m"
 RESET="\033[0m"
 
-if [ "$EUID" -eq 0 ]; then
+if [ "$(id -u)" -eq 0 ]; then
     ROOT=true
 else
     ROOT=false
