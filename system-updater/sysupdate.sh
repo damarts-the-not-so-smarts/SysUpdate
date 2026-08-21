@@ -14,7 +14,7 @@ if command -v chafa >/dev/null 2>&1; then
 else
 	printf "%b" "$BLUE"
 	echo "<###################################>"
-	echo " >##      SysUpdate cool ye      ##<"
+	echo " >##          SysUpdate          ##<"
 	echo "<###################################>"
 	printf "%b" "$RESET"
 	
@@ -83,6 +83,9 @@ case "$PKG" in
     "zypper")
         $AUTH zypper refresh --force && $AUTH zypper dist-upgrade -y --allow-vendor-change
         ;;
+    "zeta")
+        $AUTH zeta -Elevate --pass
+        ;;
     *)
     		printf "%b" "$YELLOW"
         echo "[W] : No valid package manager, Skipping.."
@@ -120,7 +123,7 @@ if command -v brew >/dev/null 2>&1; then
 	if [ "$PKG" != "brew" ]; then
 		echo ""
 		printf "%b" "$GREEN"
-        echo "[>>>]: Updating brews.." # ur banned for using brew if ur on linux btw
+        echo "[>>>]: Updating brews.." # ur banned for using brew if ur on linux btw <3
 	    printf "%b" "$RESET"
         brew update && brew upgrade --formula --cask
     fi

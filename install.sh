@@ -11,17 +11,22 @@ DIRECTORY=$(dirname "$0")
 printf "%b" "$BLUE"
 
 cat << 'EOF'
-▄▄   ▄▄       ▄▄                           ▄▄ 
-██   ██       ██                           ██ 
-▓▓   ▓▓       ▓▓                           ▓▓ 
-▓▓   ▓▓       ▓▓                           ▓▓ 
-▒▒ ▒ ▒▒  ▄▄▄▄ ▒▒   ▄▄▄  ▄▄▄  ▄▄▄▄▄▄   ▄▄▄▄ ▒▒ 
-▒▒ ▒ ▒▒ ▒▒ ▒▒ ▒▒  ▒▒ ▒ ▒▒ ▒▒ ▒▒ ▒ ▒▒ ▒▒ ▒▒ ▒▒ 
-░░ ░ ░░ ░░▄░░ ░░  ░░   ░░ ░░ ░░ ░ ░░ ░░▄░░ ░░ 
-░░ ░ ░░ ░░ ▄▄ ░░  ░░   ░░ ░░ ░░ ░ ░░ ░░ ▄▄    
-██▄█▄██ ██ ██ ██  ██ █ ██ ██ ██   ██ ██ ██ ██ 
- ▀▀▀▀▀   ▀▀▀▀  ▀▀  ▀▀▀  ▀▀▀  ▀▀   ▀▀  ▀▀▀▀ ▀▀ 
-                                                                                       
+                                                   ,---,  
+        ,--,                                    ,`--.' |  
+      ,--.'|            ,--,    ,--,            |   :  :  
+   ,--,  | :          ,--.'|  ,--.'|            '   '  ;  
+,---.'|  : '          |  | :  |  | :     ,---.  |   |  |  
+|   | : _' |          :  : '  :  : '    '   ,'\ '   :  ;  
+:   : |.'  |   ,---.  |  ' |  |  ' |   /   /   ||   |  '  
+|   ' '  ; :  /     \ '  | |  '  | |  .   ; ,. :'   :  |  
+'   |  .'. | /    /  ||  | :  |  | :  '   | |: :;   |  ;  
+|   | :  | '.    ' / |'  : |__'  : |__'   | .; :`---'. |  
+'   : |  : ;'   ;   /||  | '.'|  | '.'|   :    | `--..`;  
+|   | '  ,/ '   |  / |;  :    ;  :    ;\   \  / .--,_     
+;   : ;--'  |   :    ||  ,   /|  ,   /  `----'  |    |`.  
+|   ,/       \   \  /  ---`-'  ---`-'           `-- -`, ; 
+'---'         `----'                              '---`"  
+                                                        
 EOF
 
 if [ "$(id -u)" -eq 0 ]; then
@@ -54,10 +59,10 @@ echo -e "$YELLOW[ 7]$RESET ostree/immutable (Fedora atomic, Other)"
 echo -e "$YELLOW[ 8]$RESET pacman (Arch, EndeavourOS)"
 echo -e "$YELLOW[ 9]$RESET pkg (FreeBSD, Termux)"
 echo -e "$YELLOW[10]$RESET slapt-get (Slackware, Other)"
-echo -e "$YELLOW[11]$RESET SteamOS (SteamOS)"
-echo -e "$YELLOW[12]$RESET vso (VanillaOS)"
-echo -e "$YELLOW[13]$RESET xbps (Void)"
-echo -e "$YELLOW[14]$RESET Zypper (openSUSE)"
+echo -e "$YELLOW[11]$RESET vso (VanillaOS)"
+echo -e "$YELLOW[12]$RESET xbps (Void)"
+echo -e "$YELLOW[13]$RESET Zypper (openSUSE)"
+echo -e "$YELLOW[14]$RESET zeta (openSUSE)"
 echo -e "$YELLOW[15]$RESET Not in the list"
 
 printf "Type the number of the chosen package manager:  " && read input_num
@@ -73,10 +78,10 @@ case "$input_num" in
     8) pkg_manager="pacman" ;;
     9) pkg_manager="pkg" ;;
     10) pkg_manager="slapt-get" ;;
-    11) pkg_manager="steamos" ;;
-    12) pkg_manager="vso" ;;
-    13) pkg_manager="xbps" ;;
-    14) pkg_manager="zypper" ;;
+    11) pkg_manager="vso" ;;
+    12) pkg_manager="xbps" ;;
+    13) pkg_manager="zypper" ;;
+    14) pkg_manager="zeta" ;;
     *) pkg_manager="other" ;;
 esac
 
