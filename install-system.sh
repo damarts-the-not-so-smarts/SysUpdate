@@ -49,23 +49,23 @@ echo "Please enter the number corresponding to your native package manager: (it 
 echo ""
 printf "%b" "$RESET"
 
-echo -e "$YELLOW[ 1]$RESET apk (Alpine, Chimera)"
-echo -e "$YELLOW[ 2]$RESET apt (Debian, Ubuntu)"
-echo -e "$YELLOW[ 3]$RESET Brew (MacOS, Other)"
-echo -e "$YELLOW[ 4]$RESET dnf (Fedora, Mageia)"
-echo -e "$YELLOW[ 5]$RESET eopkg (Solus)"
-echo -e "$YELLOW[ 6]$RESET nix (NixOS, Other)"
-echo -e "$YELLOW[ 7]$RESET ostree/immutable (Fedora atomic, Other)"
-echo -e "$YELLOW[ 8]$RESET pacman (Arch, EndeavourOS)"
-echo -e "$YELLOW[ 9]$RESET pkg (FreeBSD, Termux)"
-echo -e "$YELLOW[10]$RESET slapt-get (Slackware, Other)"
-echo -e "$YELLOW[11]$RESET vso (VanillaOS)"
-echo -e "$YELLOW[12]$RESET xbps (Void)"
-echo -e "$YELLOW[13]$RESET Zypper (openSUSE)"
-echo -e "$YELLOW[14]$RESET zeta (openSUSE)"
-echo -e "$YELLOW[15]$RESET Not in the list"
+printf "%b\n" "$YELLOW[ 1]$RESET apk (Alpine, Chimera)"
+printf "%b\n" "$YELLOW[ 2]$RESET apt (Debian, Ubuntu)"
+printf "%b\n" "$YELLOW[ 3]$RESET Brew (MacOS, Other)"
+printf "%b\n" "$YELLOW[ 4]$RESET dnf (Fedora, Mageia)"
+printf "%b\n" "$YELLOW[ 5]$RESET eopkg (Solus)"
+printf "%b\n" "$YELLOW[ 6]$RESET nix (NixOS, Other)"
+printf "%b\n" "$YELLOW[ 7]$RESET ostree/immutable (Fedora atomic, Other)"
+printf "%b\n" "$YELLOW[ 8]$RESET pacman (Arch, EndeavourOS)"
+printf "%b\n" "$YELLOW[ 9]$RESET pkg (FreeBSD, Termux)"
+printf "%b\n" "$YELLOW[10]$RESET slapt-get (Slackware, Other)"
+printf "%b\n" "$YELLOW[11]$RESET vso (VanillaOS)"
+printf "%b\n" "$YELLOW[12]$RESET xbps (Void)"
+printf "%b\n" "$YELLOW[13]$RESET Zypper (openSUSE)"
+printf "%b\n" "$YELLOW[14]$RESET zeta (openSUSE)"
+printf "%b\n" "$YELLOW[15]$RESET Not in the list"
 
-printf "Type the number of the chosen package manager:  " && read input_num
+printf "Type the number of the chosen package manager:  " && read -r input_num
 
 case "$input_num" in
     1) pkg_manager="apk" ;;
@@ -85,14 +85,25 @@ case "$input_num" in
     *) pkg_manager="other" ;;
 esac
 
-echo "Selected package manager:  $pkg_manager"
+printf "Type the name for the command you wish (Default: system-updater):  " && read -r input_cmd
 
-# updating is easy as cloning or git pulling then running install.sh again
+if [ -z "$input_cmd" ]; then
+    command="system-updater"
+else
+    command=$input_cmd
+fi
+
+echo "Selected package manager:  $pkg_manager"
+echo "Selected name:  $command"
+
+# updating is easy as cloning or git pulling then running install-system.sh again
 
 $AUTH rm -rf /usr/share/system-updater
 $AUTH cp -r "${DIRECTORY}/system-updater" "/usr/share/"
 
-echo "$pkg_manager" | $AUTH tee "/usr/share/system-updater/choice.txt" > /dev/null
+echo "$pkg_manager" | $AUTH tee /usr/share/system-updater/choice.txt >/dev/null
 
-$AUTH ln -sf /usr/share/system-updater/sysupdate.sh /usr/local/bin/system-updater
-$AUTH chmod +x /usr/share/system-updater/sysupdate.sh
+$AUTH mkdir -p /usr/local/bin
+$AUTH chmod +x /usr/share/system-updater/sysupdate-system.sh
+$AUTH ln -sf /usr/share/system-updater/sysupdate-system.sh "/usr/local/bin/$command"
+

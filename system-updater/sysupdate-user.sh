@@ -7,10 +7,10 @@ GREEN="\033[92m"
 BLUE="\033[94m"
 RESET="\033[0m"
 
-PKG=$(cat "/usr/share/system-updater/choice.txt")
+pkg_manager=$(cat "$HOME/.local/share/system-updater/choice.txt")
 
 if command -v chafa >/dev/null 2>&1; then
-	chafa "/usr/share/system-updater/banner/${PKG}.png"
+	chafa "$HOME/.local/share/system-updater/banner/${pkg_manager}.png"
 else
 	printf "%b" "$BLUE"
 	echo "<###################################>"
@@ -43,7 +43,7 @@ fi
 printf "%b" "$GREEN"
 echo "[>>>] : Updating packages.."
 printf "%b" "$RESET"
-case "$PKG" in
+case "$pkg_manager" in
     "apk")
         $AUTH apk update && $AUTH apk upgrade --available
         ;;
@@ -110,7 +110,7 @@ if command -v snap >/dev/null 2>&1; then
 fi
 
 if command -v nix-env >/dev/null 2>&1; then
-	if [ "$PKG" != "nix" ]; then
+	if [ "$pkg_manager" != "nix" ]; then
 		echo ""
 		printf "%b" "$GREEN"
         echo "[>>>] : Updating nixes.. or nix's?"
@@ -120,7 +120,7 @@ if command -v nix-env >/dev/null 2>&1; then
 fi
 
 if command -v brew >/dev/null 2>&1; then
-	if [ "$PKG" != "brew" ]; then
+	if [ "$pkg_manager" != "brew" ]; then
 		echo ""
 		printf "%b" "$GREEN"
         echo "[>>>]: Updating brews.." # ur banned for using brew if ur on linux btw <3
