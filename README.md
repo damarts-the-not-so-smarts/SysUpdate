@@ -1,7 +1,7 @@
 # SysUpdate
 update your packages across multiple package managers right into your terminal!
 
-## steps to install:
+## steps to install (system edition):
 1) clone the repo and enter the folder:
 ```
 git clone https://github.com/damarts-the-not-so-smarts/SysUpdate.git
@@ -10,17 +10,40 @@ cd SysUpdate
 
 2) give the install script permissions to run, this is done by either going into your file manager and finding the option to "Run as executable" or chmodding:
 ```
-chmod +x ./install.sh
+chmod +x ./install-system.sh
 ```
 
 3) run the installer script:
 ```
-./install.sh
+./install-system.sh
+```
+
+## steps to install (user edition):
+1) clone the repo and enter the folder:
+```
+git clone https://github.com/damarts-the-not-so-smarts/SysUpdate.git
+cd SysUpdate
+```
+
+2) give the install script permissions to run, this is done by either going into your file manager and finding the option to "Run as executable" or chmodding:
+```
+chmod +x ./install-user.sh
+```
+
+3) run the installer script:
+```
+./install-user.sh
+```
+
+> NOTICE:  to get the command working, you have to add an alias in you shell (bash, fish, zsh, etc) because most shells dont automatically add ~/.local/bin as an alias. find out how on your shell's guides
+if you want to run it regardless:
+```
+~/.local/bin/(name you chose in setup)
 ```
 
 
 ## steps to manual install:
-1) read the goddamn install.sh script its tiny
+1) read the install.sh script its tiny
 2) done
 
 
