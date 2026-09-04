@@ -35,7 +35,7 @@ chmod +x ./install-user.sh
 ./install-user.sh
 ```
 
-> NOTICE:  to get the command working, you have to add an alias in you shell (bash, fish, zsh, etc) because most shells dont automatically add ~/.local/bin as an alias. find out how on your shell's guides
+> NOTICE:  to get the command working (on most shells), make sure ~/.local/bin is added to your shell's $PATH variable (in ~/.bashrc or ~/.zshrc), find how on your shell's guides
 if you want to run it regardless:
 ```
 ~/.local/bin/(name you chose in setup)
