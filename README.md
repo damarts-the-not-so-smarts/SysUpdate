@@ -35,7 +35,7 @@ chmod +x ./install-user.sh
 ./install-user.sh
 ```
 
-> NOTICE:  to get the command working (on most shells), make sure ~/.local/bin is added to your shell's $PATH variable (in ~/.bashrc or ~/.zshrc), find how on your shell's guides
+> notice: to get the command working (on most shells), make sure ~/.local/bin is added to your shell's $PATH variable (in ~/.bashrc or ~/.zshrc), find how on your shell's guides
 if you want to run it regardless:
 ```
 ~/.local/bin/(name you chose in setup)
@@ -50,6 +50,8 @@ if you want to run it regardless:
 ## dependancies:
 - chafa is needed to display the banner image, find how to install chafa for you specific linux distro. (its name on most package managers is `chafa` try that if you cant find it)
 - if youre on an immutable distro that doesnt use ostree, use the brew package manager to install it
+- if you dont have `chafa` in your repos, try compiling it  via git cloning its repository.
+> notice: you wont need chafa to run the script, it will show a fallback banner
 
 
 ## reasons to use this
