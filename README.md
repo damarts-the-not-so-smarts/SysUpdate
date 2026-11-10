@@ -50,5 +50,5 @@ if you want to run it regardless:
 ## dependancies:
 - chafa is needed to display the banner image, find how to install chafa for you specific linux distro. (its name on most package managers is `chafa` try that if you cant find it)
 - if youre on an immutable distro that doesnt use ostree, use the brew package manager to install it
-- if you dont have `chafa` in your repos, try compiling it  via git cloning its repository.
-> notice: you wont need chafa to run the script, it will show a fallback banner
+- if you dont have `chafa` in your repos, try compiling it via git cloning its repository.
+> notice: you won't need chafa to run the script, it will show a fallback banner
