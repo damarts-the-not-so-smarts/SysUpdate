@@ -75,7 +75,7 @@ case "$pkg_manager" in
         $AUTH slapt-get --update && $AUTH slapt-get --upgrade -y
         ;;
     "vso")
-        vso update
+        $AUTH vso upgrade
         ;;
     "xbps")
         $AUTH xbps-install -Syu
@@ -123,7 +123,7 @@ if command -v brew >/dev/null 2>&1; then
 	if [ "$pkg_manager" != "brew" ]; then
 		echo ""
 		printf "%b" "$GREEN"
-        echo "[>>>]: Updating brews.." # ur banned for using brew if ur on linux btw <3
+        echo "[>>>]: Updating brews.." # boo
 	    printf "%b" "$RESET"
         brew update && brew upgrade --formula --cask
     fi

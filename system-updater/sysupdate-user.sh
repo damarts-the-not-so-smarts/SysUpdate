@@ -33,6 +33,8 @@ elif command -v doas >/dev/null 2>&1; then
     AUTH="doas"
 elif command -v sudo >/dev/null 2>&1; then
     AUTH="sudo"
+elif command -v pkexec >/dev/null 2>&1; then
+    AUTH="pkexec"
 else
     printf "%b" "$RED"
     echo "[E] : Authentication tool not found."
@@ -75,7 +77,7 @@ case "$pkg_manager" in
         $AUTH slapt-get --update && $AUTH slapt-get --upgrade -y
         ;;
     "vso")
-        vso update
+        $AUTH vso upgrade
         ;;
     "xbps")
         $AUTH xbps-install -Syu

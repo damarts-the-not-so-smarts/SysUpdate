@@ -59,7 +59,7 @@ printf "%b\n" "$YELLOW[ 7]$RESET ostree/immutable (Fedora atomic, Other)"
 printf "%b\n" "$YELLOW[ 8]$RESET pacman (Arch, EndeavourOS)"
 printf "%b\n" "$YELLOW[ 9]$RESET pkg (FreeBSD, Termux)"
 printf "%b\n" "$YELLOW[10]$RESET slapt-get (Slackware, Other)"
-printf "%b\n" "$YELLOW[11]$RESET VanillaOS"
+printf "%b\n" "$YELLOW[11]$RESET vso (VanillaOS)"
 printf "%b\n" "$YELLOW[12]$RESET xbps (Void)"
 printf "%b\n" "$YELLOW[13]$RESET Zypper (openSUSE)"
 printf "%b\n" "$YELLOW[14]$RESET zeta (openSUSE)"
@@ -78,7 +78,7 @@ case "$input_num" in
     8) pkg_manager="pacman" ;;
     9) pkg_manager="pkg" ;;
     10) pkg_manager="slapt-get" ;;
-    11) pkg_manager="vanilla" ;;
+    11) pkg_manager="vso" ;;
     12) pkg_manager="xbps" ;;
     13) pkg_manager="zypper" ;;
     14) pkg_manager="zeta" ;;

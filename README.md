@@ -52,9 +52,3 @@ if you want to run it regardless:
 - if youre on an immutable distro that doesnt use ostree, use the brew package manager to install it
 - if you dont have `chafa` in your repos, try compiling it  via git cloning its repository.
 > notice: you wont need chafa to run the script, it will show a fallback banner
-
-
-## reasons to use this
-- because cool banner
-- updates all secondary or other package managers
-- flex on homies
